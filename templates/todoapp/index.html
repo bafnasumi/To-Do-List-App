@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col">
+        <h2>Add Item</h2>
+        <div class="row">
+            <form class="form-inline" action="{% url 'add_todo' %}" method="post">
+                <!--            {% csrf_token %}-->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputText" name="content"
+                    "aria-describedby="textHelp">
+                </div>
+
+                <div class="col">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <ul class="list-group">
+                {% for todo_item in todo_items %}
+                <li class="list-group-item">{{ todo_item.text }}
+                    <div class="float-right">
+                        <form action="delete_todo/{{ todo_item.id }}" method="post" >
+                            <button type="submit" class="btn btn-dark btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
